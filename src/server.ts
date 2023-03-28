@@ -1,6 +1,6 @@
 import fastify from 'fastify'
 
-import { env } from './env.ts'
+import { env } from './env'
 import { transactionsRoutes } from './routes/transactions'
 
 const app = fastify()
