@@ -1,7 +1,23 @@
-import { expect, test } from 'vitest'
+import { afterAll, beforeAll, test } from 'vitest'
+import request  from 'supertest'
 
-test('de certo', () => {
-    const dale = 201;
+import { app } from '../src/app'
 
-    expect(dale).toEqual(201)
+beforeAll(async () => {
+    await app.ready()
+})
+
+afterAll(async () => {
+    await app.close()
+})
+
+test('should create a new transaction', async () => {
+   await request(app.server)
+    .post('/transactions')
+    .send({
+        title: 'new transaction',
+        amount: 5000,
+        type: 'credit'
+    })
+    .expect(201);
 })
